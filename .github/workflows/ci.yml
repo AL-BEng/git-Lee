@@ -22,8 +22,15 @@ jobs:
     #   run: npm run lint
     - name: Build project
       run: npm run build
-   
 
+    - name: Package and zip
+      run: npm run build:zip
+   
+    # - name: Upload build artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: build-artifact
+    #     path: dist
 
     - name: Run tests
       run: npm run test
