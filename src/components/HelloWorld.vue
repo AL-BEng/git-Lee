@@ -4,13 +4,13 @@ import { ref } from 'vue'
 defineProps({
   msg: String,
 })
-111
+
 const count = ref(0)
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
-
+  <p>在2-branch分支上修改的HelloWorld组件</p>
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
