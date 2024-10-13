@@ -19,4 +19,19 @@ describe('ResourceHomePage', () => {
     const footerLinks = wrapper.findAll('.footer-link')
     expect(footerLinks).toHaveLength(3)
   })
+
+  // branch-2: 添加搜索框相关的测试
+  it('渲染搜索框', () => {
+    const wrapper = mount(ResourceHomePage)
+    const searchInput = wrapper.find('.search-box input')
+    expect(searchInput.exists()).toBe(true)
+    expect(searchInput.attributes('placeholder')).toBe('搜索资源...')
+  })
+
+  it('搜索框可以输入内容', async () => {
+    const wrapper = mount(ResourceHomePage)
+    const searchInput = wrapper.find('.search-box input')
+    await searchInput.setValue('测试搜索')
+    expect(searchInput.element.value).toBe('测试搜索')
+  })
 })

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const resources = ref([
   { name: 'Bilibili', url: 'https://www.bilibili.com', icon: 'https://www.bilibili.com/favicon.ico' },
@@ -12,6 +12,9 @@ const footerLinks = ref([
   { name: '联系投稿', url: '#submit' },
   { name: '支持我们', url: '#support' },
 ])
+
+// branch-2: 添加搜索相关的响应式变量
+const searchQuery = ref('')
 </script>
 
 <template>
@@ -20,6 +23,10 @@ const footerLinks = ref([
       <h1 class="title">资源导航网</h1>
     </header>
     <main class="resource-nav">
+      <!-- branch-2: 添加搜索框 -->
+      <div class="search-box">
+        <input v-model="searchQuery" placeholder="搜索资源...">
+      </div>
       <div class="resources">
         <a 
           v-for="resource in resources" 
@@ -74,6 +81,31 @@ header {
   max-width: 400px;
   margin: 20px auto;
   padding: 0 20px;
+}
+
+/* branch-2: 添加搜索框样式 */
+.search-box {
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff; 
+  color: #333; 
+}
+
+.search-box input::placeholder {
+  color: #999; 
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #007bff; 
+  box-shadow: 0 0 0 2px rgba(0,123,255,.25); 
 }
 
 .resources {
