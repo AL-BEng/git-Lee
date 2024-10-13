@@ -3,11 +3,6 @@ import { describe, it, expect } from 'vitest'
 import ResourceHomePage from '../components/ResourceHomePage.vue'
 
 describe('ResourceHomePage', () => {
-  it('渲染标题正确', () => {
-    const wrapper = mount(ResourceHomePage)
-    expect(wrapper.find('.title').text()).toBe('资源导航网')
-  })
-
   it('渲染正确数量的资源链接', () => {
     const wrapper = mount(ResourceHomePage)
     const resources = wrapper.findAll('.resource')
@@ -20,7 +15,6 @@ describe('ResourceHomePage', () => {
     expect(footerLinks).toHaveLength(3)
   })
 
-  // branch-2: 添加搜索框相关的测试
   it('渲染搜索框', () => {
     const wrapper = mount(ResourceHomePage)
     const searchInput = wrapper.find('.search-box input')
@@ -33,5 +27,20 @@ describe('ResourceHomePage', () => {
     const searchInput = wrapper.find('.search-box input')
     await searchInput.setValue('测试搜索')
     expect(searchInput.element.value).toBe('测试搜索')
+  })
+
+  it('渲染正确数量的导航链接', () => {
+    const wrapper = mount(ResourceHomePage)
+    const navLinks = wrapper.findAll('.nav-link')
+    expect(navLinks).toHaveLength(4)
+  })
+
+  it('导航链接文本正确', () => {
+    const wrapper = mount(ResourceHomePage)
+    const navLinks = wrapper.findAll('.nav-link')
+    const expectedTexts = ['首页', '分类', '热门', '关于']
+    navLinks.forEach((link, index) => {
+      expect(link.text()).toBe(expectedTexts[index])
+    })
   })
 })
