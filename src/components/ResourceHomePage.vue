@@ -116,17 +116,17 @@ const navLinks = ref([
   border: 1px solid #d0d7de;
   border-radius: 6px;
   color: #24292f;
-  background-color: #ffffff; /* 确保背景是白色 */
+  background-color: #ffffff; 
 }
 
 .search-box input::placeholder {
-  color: #6e7781; /* 设置占位符文字颜色 */
+  color: #6e7781; 
 }
 
 .search-box input:focus {
   outline: none;
   border-color: #0969da;
-  box-shadow: 0 0 0 3px rgba(9,105,218,0.3); /* 添加轻微的焦点效果 */
+  box-shadow: 0 0 0 3px rgba(9,105,218,0.3); 
 }
 
 .main-content {
