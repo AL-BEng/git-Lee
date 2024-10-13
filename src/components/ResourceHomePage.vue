@@ -15,18 +15,34 @@ const footerLinks = ref([
 
 // branch-2: 添加搜索相关的响应式变量
 const searchQuery = ref('')
+
+// 新增: 导航栏链接
+const navLinks = ref([
+  { name: '首页', url: '/' },
+  { name: '分类', url: '/categories' },
+  { name: '热门', url: '/trending' },
+  { name: '关于', url: '/about' },
+])
 </script>
 
 <template>
   <div class="page-container">
-    <header>
-      <h1 class="title">资源导航网</h1>
-    </header>
-    <main class="resource-nav">
-      <!-- branch-2: 添加搜索框 -->
+    <header class="top-nav">
+      <nav class="nav-links">
+        <a 
+          v-for="link in navLinks" 
+          :key="link.name"
+          :href="link.url"
+          class="nav-link"
+        >
+          {{ link.name }}
+        </a>
+      </nav>
       <div class="search-box">
         <input v-model="searchQuery" placeholder="搜索资源...">
       </div>
+    </header>
+    <main class="main-content">
       <div class="resources">
         <a 
           v-for="resource in resources" 
@@ -58,106 +74,110 @@ const searchQuery = ref('')
 
 <style scoped>
 .page-container {
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  color: #24292f;
 }
 
-header {
-  background-color: #f0f0f0;
-  padding: 20px 0;
-  text-align: center;
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
 }
 
-.title {
-  font-size: 28px;
-  color: #333;
-  margin: 0;
+.nav-links {
+  display: flex;
 }
 
-.resource-nav {
-  flex-grow: 1;
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 0 20px;
+.nav-link {
+  color: #24292f;
+  text-decoration: none;
+  font-size: 14px;
+  margin-right: 16px;
+  font-weight: 500;
 }
 
-/* branch-2: 添加搜索框样式 */
+.nav-link:hover {
+  color: #0969da;
+}
+
 .search-box {
-  margin-bottom: 20px;
+  width: 300px;
 }
 
 .search-box input {
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff; 
-  color: #333; 
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  color: #24292f;
+  background-color: #ffffff; /* 确保背景是白色 */
 }
 
 .search-box input::placeholder {
-  color: #999; 
+  color: #6e7781; /* 设置占位符文字颜色 */
 }
 
 .search-box input:focus {
   outline: none;
-  border-color: #007bff; 
-  box-shadow: 0 0 0 2px rgba(0,123,255,.25); 
+  border-color: #0969da;
+  box-shadow: 0 0 0 3px rgba(9,105,218,0.3); /* 添加轻微的焦点效果 */
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 24px;
 }
 
 .resources {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
 }
 
 .resource {
   display: flex;
   align-items: center;
-  padding: 15px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
+  padding: 16px;
   text-decoration: none;
-  color: #333;
-  transition: background-color 0.3s;
+  color: #24292f;
+  transition: background-color 0.2s;
 }
 
 .resource:hover {
-  background-color: #e0e0e0;
+  background-color: #f6f8fa;
 }
 
 .resource-icon {
   width: 24px;
   height: 24px;
-  margin-right: 15px;
+  margin-right: 12px;
   object-fit: contain;
 }
 
 .resource-name {
-  font-size: 18px;
-}
-
-footer {
-  background-color: #f0f0f0;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.footer-nav {
-  margin-bottom: 10px;
-}
-
-.footer-link {
-  color: #666;
-  text-decoration: none;
-  margin: 0 10px;
   font-size: 14px;
 }
 
+footer {
+  padding: 24px 0;
+  text-align: center;
+}
+
+.footer-link {
+  color: #24292f;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 12px;
+}
+
 .footer-link:hover {
+  color: #0969da;
   text-decoration: underline;
 }
 </style>
